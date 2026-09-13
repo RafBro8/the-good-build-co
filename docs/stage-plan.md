@@ -106,3 +106,31 @@ Build:
 
 Commit checkpoint:
 - `style: polish construction demo`
+
+## Stage 7: Vercel Deployment
+
+Goal: publish the frontend-only demo so clients can click through it.
+
+Build:
+- Vercel project setup.
+- Vite build configuration.
+- Live demo URL.
+- Route refresh verification.
+
+Commit checkpoint:
+- No code commit required unless deployment config changes.
+
+## Stage 8: Portfolio Packaging
+
+Goal: make the project easy to present as a portfolio/client demo.
+
+Build:
+- Live demo link in README.
+- Polished case study section.
+- Screenshot assets.
+- Subtle footer demo disclaimer.
+- Future-improvements notes.
+- Final build/lint verification.
+
+Commit checkpoint:
+- `docs: package construction demo case study`

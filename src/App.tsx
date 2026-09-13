@@ -1365,6 +1365,9 @@ function Footer({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
         <div>
           <p className="font-display text-xl font-semibold text-white">The Good Build Co.</p>
           <p className="mt-1">Good work. Good people. Good builds.</p>
+          <p className="mt-2 text-xs uppercase tracking-[0.14em] text-white/38">
+            Portfolio demo concept for a residential construction brand.
+          </p>
         </div>
         <nav aria-label="Footer navigation" className="flex flex-wrap gap-3">
           {navItems.map((item) => (
