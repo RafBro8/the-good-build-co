@@ -331,7 +331,7 @@ function Header({
   onNavigate: (path: PagePath) => void;
 }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-ink/10 bg-bone/92 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-pine/15 bg-plaster/94 backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
         <a
           className="font-display text-2xl font-semibold text-ink"
@@ -351,8 +351,8 @@ function Header({
             <a
               className={`whitespace-nowrap border px-3 py-2 transition ${
                 currentPath === item.href
-                  ? 'border-clay bg-ink text-white'
-                  : 'border-ink/10 bg-plaster hover:border-clay hover:text-clay'
+                  ? 'border-brass bg-pine text-white'
+                  : 'border-pine/12 bg-limestone/55 hover:border-brass hover:text-pine'
               }`}
               href={item.href}
               key={item.href}
@@ -392,7 +392,7 @@ function Hero({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
           className="h-full w-full object-cover"
           src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=2200&q=84"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/82 to-ink/26" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-pine/84 to-steel/24" />
       </div>
 
       <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl gap-10 px-5 py-20 text-white sm:px-8 lg:grid-cols-[0.92fr_0.62fr] lg:items-end lg:py-24">
@@ -414,13 +414,13 @@ function Hero({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
           </div>
         </div>
 
-        <div className="border border-white/16 bg-white/12 p-5 backdrop-blur-md">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">
+        <div className="border border-white/18 bg-pine/42 p-5 shadow-soft backdrop-blur-md">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brass">
             Built around trust
           </p>
-          <dl className="mt-6 grid gap-px overflow-hidden bg-white/16 sm:grid-cols-3 lg:grid-cols-1">
+          <dl className="mt-6 grid gap-px overflow-hidden bg-white/18 sm:grid-cols-3 lg:grid-cols-1">
             {proofPoints.map(([stat, label]) => (
-              <div className="bg-ink/52 p-5" key={label}>
+              <div className="bg-ink/46 p-5" key={label}>
                 <dt className="font-display text-4xl font-semibold">{stat}</dt>
                 <dd className="mt-1 text-sm text-white/68">{label}</dd>
               </div>
@@ -449,18 +449,18 @@ function TrustBand() {
   ];
 
   return (
-    <section className="bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-px bg-white/10 px-5 py-px sm:px-8 md:grid-cols-3">
+    <section className="border-b border-pine/12 bg-limestone text-ink">
+      <div className="mx-auto grid max-w-7xl gap-px bg-pine/12 px-5 py-px sm:px-8 md:grid-cols-3">
         {trustItems.map((item, index) => (
-          <article className="grid gap-4 bg-ink px-5 py-7 sm:grid-cols-[auto_1fr]" key={item.label}>
-            <p className="font-display text-3xl font-semibold text-copper">
+          <article className="grid gap-4 bg-plaster px-5 py-7 sm:grid-cols-[auto_1fr]" key={item.label}>
+            <p className="font-display text-3xl font-semibold text-clay">
               {String(index + 1).padStart(2, '0')}
             </p>
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-white">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-pine">
                 {item.label}
               </h2>
-              <p className="mt-2 text-sm leading-6 text-white/58">{item.text}</p>
+              <p className="mt-2 text-sm leading-6 text-ink/62">{item.text}</p>
             </div>
           </article>
         ))}
@@ -471,7 +471,7 @@ function TrustBand() {
 
 function HomeServices({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   return (
-    <section className="py-20">
+    <section className="bg-bone py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="What we build"
@@ -493,7 +493,7 @@ function HomeServices({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
 
 function HomeProjects({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   return (
-    <section className="bg-ink py-20 text-white">
+    <section className="bg-gradient-to-br from-ink via-pine to-graphite py-20 text-white">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="Project style"
@@ -512,7 +512,7 @@ function HomeProjects({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
 
 function HomeProcess({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   return (
-    <section className="border-b border-ink/10 bg-plaster py-20">
+    <section className="border-b border-pine/12 bg-plaster py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionIntro
           eyebrow="How it works"
@@ -530,7 +530,7 @@ function HomeProcess({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
 
 function HomeCta({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   return (
-    <section className="py-16">
+    <section className="bg-bone py-16">
       <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:px-8 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-clay">Estimate</p>
@@ -600,7 +600,7 @@ function ProjectsPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
         title="Real project storytelling, not just a grid of pretty rooms."
         text="A contractor portfolio should show what changed, how the scope was shaped, and why the final result feels right for the home."
       />
-      <section className="bg-ink py-16 text-white">
+      <section className="bg-gradient-to-br from-ink via-pine to-graphite py-16 text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex gap-2 overflow-x-auto pb-2">
             {projectCategories.map((category) => (
@@ -808,8 +808,8 @@ function ContactPage() {
                 ['2', 'We shape the first scope.'],
                 ['3', 'You get a clearer next step.'],
               ].map(([number, text]) => (
-                <div className="bg-ink p-5" key={text}>
-                  <p className="font-display text-4xl font-semibold text-copper">{number}</p>
+                <div className="bg-ink/46 p-5" key={text}>
+                  <p className="font-display text-4xl font-semibold text-brass">{number}</p>
                   <p className="mt-2 text-sm leading-6 text-white/64">{text}</p>
                 </div>
               ))}
@@ -821,7 +821,7 @@ function ContactPage() {
               <EstimateConfirmation request={submittedRequest} onReset={resetForm} />
             ) : (
               <form
-                className="grid gap-5 border border-white/12 bg-plaster p-6 text-ink shadow-soft"
+                className="grid gap-5 border border-white/14 bg-plaster p-6 text-ink shadow-soft"
                 onSubmit={handleSubmit}
               >
                 <div>
@@ -912,7 +912,7 @@ function ContactPage() {
                   value={form.notes}
                 />
                 <button
-                  className="bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
+                  className="bg-pine px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
                   type="submit"
                 >
                   Preview request
@@ -922,7 +922,7 @@ function ContactPage() {
 
             <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
               {['Review request', 'Schedule walkthrough', 'Shape first scope'].map((step) => (
-                <div className="bg-ink p-5 text-sm font-bold uppercase tracking-[0.14em] text-white/68" key={step}>
+                <div className="bg-ink/46 p-5 text-sm font-bold uppercase tracking-[0.14em] text-white/72" key={step}>
                   {step}
                 </div>
               ))}
@@ -931,8 +931,8 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="border-b border-ink/10 bg-plaster py-12">
-        <div className="mx-auto grid max-w-7xl gap-px bg-ink/10 px-5 sm:px-8 md:grid-cols-3">
+      <section className="border-b border-pine/12 bg-limestone py-12">
+        <div className="mx-auto grid max-w-7xl gap-px bg-pine/12 px-5 sm:px-8 md:grid-cols-3">
           {['No pressure walkthrough', 'Scope before numbers', 'Plain-language next steps'].map(
             (item) => (
               <div className="bg-plaster p-5 text-sm font-bold uppercase tracking-[0.16em] text-pine" key={item}>
@@ -948,7 +948,7 @@ function ContactPage() {
 
 function PageHero({ eyebrow, text, title }: { eyebrow: string; text: string; title: string }) {
   return (
-    <section className="border-b border-ink/10 bg-ink py-20 text-white">
+    <section className="border-b border-pine/20 bg-gradient-to-br from-ink via-pine to-graphite py-20 text-white">
       <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-copper">{eyebrow}</p>
@@ -1113,7 +1113,7 @@ function ProcessGrid({ compact = false }: { compact?: boolean }) {
 
 function ScopeBoard() {
   return (
-    <div className="mt-10 grid gap-8 border border-ink/10 bg-ink p-6 text-white lg:grid-cols-[0.78fr_1.22fr]">
+    <div className="mt-10 grid gap-8 border border-pine/20 bg-gradient-to-br from-pine to-ink p-6 text-white lg:grid-cols-[0.78fr_1.22fr]">
       <div>
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-copper">Scope board</p>
         <h2 className="mt-4 font-display text-4xl font-semibold leading-tight">
@@ -1122,7 +1122,7 @@ function ScopeBoard() {
       </div>
       <div className="grid gap-px overflow-hidden bg-white/10 sm:grid-cols-2">
         {['What changes', 'What stays', 'What decisions matter', 'What can wait'].map((item) => (
-          <div className="bg-ink p-5 text-sm font-bold text-white/72" key={item}>
+          <div className="bg-white/8 p-5 text-sm font-bold text-white/76" key={item}>
             {item}
           </div>
         ))}
@@ -1172,7 +1172,7 @@ function EstimateConfirmation({
       </dl>
 
       <button
-        className="mt-6 bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
+        className="mt-6 bg-pine px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
         onClick={onReset}
         type="button"
       >
@@ -1207,7 +1207,7 @@ function Field({
       <input
         aria-describedby={error ? errorId : undefined}
         aria-invalid={Boolean(error)}
-        className="h-12 border border-ink/12 bg-bone px-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        className="h-12 border border-pine/14 bg-limestone/45 px-3 text-sm font-medium text-ink outline-none focus:border-clay"
         name={name}
         onChange={onChange}
         placeholder={placeholder}
@@ -1240,7 +1240,7 @@ function SelectField({
     <label className="grid gap-2 text-sm font-bold text-ink">
       {label}
       <select
-        className="h-12 border border-ink/12 bg-bone px-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        className="h-12 border border-pine/14 bg-limestone/45 px-3 text-sm font-medium text-ink outline-none focus:border-clay"
         name={name}
         onChange={onChange}
         value={value}
@@ -1276,7 +1276,7 @@ function TextareaField({
       <textarea
         aria-describedby={error ? errorId : undefined}
         aria-invalid={Boolean(error)}
-        className="min-h-32 border border-ink/12 bg-bone px-3 py-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        className="min-h-32 border border-pine/14 bg-limestone/45 px-3 py-3 text-sm font-medium text-ink outline-none focus:border-clay"
         name={name}
         onChange={onChange}
         placeholder={placeholder}
@@ -1337,11 +1337,11 @@ function RouteButton({
   tone: 'dark' | 'ghost' | 'light' | 'solid' | 'solidDark';
 }) {
   const toneClass = {
-    dark: 'bg-ink text-white hover:bg-clay',
+    dark: 'bg-pine text-white hover:bg-clay',
     ghost: 'border border-white/28 bg-white/10 text-white backdrop-blur hover:bg-white hover:text-ink',
-    light: 'bg-white text-ink hover:bg-copper hover:text-white',
-    solid: 'bg-copper text-white hover:bg-clay',
-    solidDark: 'bg-ink text-white hover:bg-clay',
+    light: 'bg-plaster text-ink hover:bg-brass hover:text-ink',
+    solid: 'bg-copper text-white hover:bg-pine',
+    solidDark: 'bg-pine text-white hover:bg-clay',
   }[tone];
 
   return (
@@ -1360,7 +1360,7 @@ function RouteButton({
 
 function Footer({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   return (
-    <footer className="border-t border-ink/10 bg-ink py-8 text-white">
+    <footer className="border-t border-pine/20 bg-ink py-8 text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 text-sm text-white/62 sm:px-8 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="font-display text-xl font-semibold text-white">The Good Build Co.</p>

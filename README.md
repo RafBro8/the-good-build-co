@@ -4,7 +4,7 @@ Premium React and Tailwind demo website for a modern residential construction co
 
 ## Current Stage
 
-Stage 5: SEO and deployment prep.
+Stage 5.5: color system and visual mood polish.
 
 ## Brand Direction
 
@@ -30,6 +30,7 @@ Positioning:
 - Project gallery with categories, case-study notes, scope details, and finish notes.
 - Frontend-only estimate flow with validation, preferred contact method, and request summary.
 - SEO-ready route metadata, social preview tags, sitemap, robots file, and Vercel route rewrites.
+- Material-inspired color system with pine, limestone, brass, clay, plaster, and warm charcoal.
 
 ## Portfolio Case Study
 
@@ -48,6 +49,7 @@ Features:
 - Project gallery with category filtering and case-study details.
 - Controlled estimate form with validation and confirmation summary.
 - Deployment-ready SEO files and Vercel rewrites.
+- Warm contractor-specific visual language that avoids a generic black-and-white template feel.
 
 Screenshots:
 

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Good Build Co. monogram">
-  <rect width="64" height="64" rx="10" fill="#f5f1e8"/>
-  <path fill="#20241f" d="M12 44h40v7H12z"/>
-  <path fill="#274f3b" d="M18 20h28l6 10H12z"/>
-  <path fill="#b45f3c" d="M22 31h8v13h-8zM34 31h8v13h-8z"/>
+  <rect width="64" height="64" rx="10" fill="#f3eee4"/>
+  <path fill="#1f2922" d="M12 44h40v7H12z"/>
+  <path fill="#2f6047" d="M18 20h28l6 10H12z"/>
+  <path fill="#a95638" d="M22 31h8v13h-8zM34 31h8v13h-8z"/>
   <path fill="#fffaf1" d="M24 33h4v4h-4zM36 33h4v4h-4z"/>
 </svg>

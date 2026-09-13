@@ -77,6 +77,21 @@ Build:
 Commit checkpoint:
 - `chore: prepare construction demo deployment`
 
+## Stage 5.5: Color System and Visual Mood Polish
+
+Goal: make the demo feel more custom, warm, and premium without adding a light/dark toggle.
+
+Build:
+- Refined contractor palette.
+- Material-inspired accent colors.
+- Softer light surfaces.
+- Richer dark sections.
+- Updated favicon and social preview colors.
+- Visual hierarchy pass for buttons, trust strip, forms, and page heroes.
+
+Commit checkpoint:
+- `style: refine construction color system`
+
 ## Stage 6: Visual QA and Polish
 
 Goal: make the demo screenshot-ready on desktop and mobile.
