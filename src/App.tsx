@@ -57,6 +57,9 @@ const pagePaths = new Set<PagePath>([
   '/contact',
 ]);
 
+const siteUrl = 'https://thegoodbuildco.com';
+const socialImageUrl = `${siteUrl}/og-image.svg`;
+
 const navItems: { href: PagePath; label: string }[] = [
   { href: '/services', label: 'Services' },
   { href: '/projects', label: 'Projects' },
@@ -285,7 +288,7 @@ function App() {
 
   return (
     <main className="min-h-screen bg-bone text-ink">
-      <PageMetadata metadata={metadata[currentPath]} />
+      <PageMetadata metadata={metadata[currentPath]} path={currentPath} />
       <Header currentPath={currentPath} onNavigate={navigate} />
       {currentPath === '/' ? <HomePage onNavigate={navigate} /> : null}
       {currentPath === '/services' ? <ServicesPage onNavigate={navigate} /> : null}
@@ -298,13 +301,24 @@ function App() {
   );
 }
 
-function PageMetadata({ metadata: pageMetadata }: { metadata: Metadata }) {
+function PageMetadata({ metadata: pageMetadata, path }: { metadata: Metadata; path: PagePath }) {
   useEffect(() => {
+    const canonicalUrl = `${siteUrl}${path === '/' ? '/' : path}`;
+
     document.title = pageMetadata.title;
+    setCanonicalLink(canonicalUrl);
     setMetaTag('name', 'description', pageMetadata.description);
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
+    setMetaTag('name', 'twitter:title', pageMetadata.title);
+    setMetaTag('name', 'twitter:description', pageMetadata.description);
+    setMetaTag('name', 'twitter:image', socialImageUrl);
+    setMetaTag('property', 'og:site_name', 'The Good Build Co.');
     setMetaTag('property', 'og:title', pageMetadata.title);
     setMetaTag('property', 'og:description', pageMetadata.description);
-  }, [pageMetadata]);
+    setMetaTag('property', 'og:type', 'website');
+    setMetaTag('property', 'og:url', canonicalUrl);
+    setMetaTag('property', 'og:image', socialImageUrl);
+  }, [pageMetadata, path]);
 
   return null;
 }
@@ -1419,6 +1433,18 @@ function setMetaTag(attribute: 'name' | 'property', key: string, content: string
   }
 
   element.setAttribute('content', content);
+}
+
+function setCanonicalLink(href: string) {
+  let element = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+  if (!element) {
+    element = document.createElement('link');
+    element.setAttribute('rel', 'canonical');
+    document.head.appendChild(element);
+  }
+
+  element.setAttribute('href', href);
 }
 
 export default App;

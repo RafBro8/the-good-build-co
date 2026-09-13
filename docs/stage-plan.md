@@ -67,9 +67,11 @@ Goal: prepare the demo for Vercel and portfolio use.
 
 Build:
 - Route metadata.
+- Canonical URLs.
 - Social preview tags.
 - Sitemap and robots file.
-- Vercel rewrite.
+- Branded social preview image.
+- Vercel route rewrites.
 - README/case study content.
 
 Commit checkpoint:

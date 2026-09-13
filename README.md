@@ -4,7 +4,7 @@ Premium React and Tailwind demo website for a modern residential construction co
 
 ## Current Stage
 
-Stage 4: estimate request flow.
+Stage 5: SEO and deployment prep.
 
 ## Brand Direction
 
@@ -29,6 +29,30 @@ Positioning:
 - Multi-page structure for services, projects, process, about, and estimate flow.
 - Project gallery with categories, case-study notes, scope details, and finish notes.
 - Frontend-only estimate flow with validation, preferred contact method, and request summary.
+- SEO-ready route metadata, social preview tags, sitemap, robots file, and Vercel route rewrites.
+
+## Portfolio Case Study
+
+Problem:
+
+Many small contractor websites feel dated, crowded, and hard to evaluate quickly. Homeowners need to understand what the company builds, see proof of taste and process, and request an estimate without digging through a one-page wall of content.
+
+Solution:
+
+The Good Build Co. demo presents a premium residential construction brand with a calm homepage, route-based navigation, service detail pages, project case studies, a process page, and a frontend-only estimate flow that feels ready for a future backend.
+
+Features:
+
+- Multi-page SPA experience for homepage, services, projects, process, about, and estimate request.
+- Sticky navigation with active page states.
+- Project gallery with category filtering and case-study details.
+- Controlled estimate form with validation and confirmation summary.
+- Deployment-ready SEO files and Vercel rewrites.
+
+Screenshots:
+
+- Add desktop homepage screenshot after final visual QA.
+- Add mobile estimate-flow screenshot after final visual QA.
 
 ## Tech Stack
 

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="The Good Build Co. social preview">
+  <rect width="1200" height="630" fill="#f5f1e8"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#20241f"/>
+  <path d="M0 500h1200v130H0z" fill="#f5f1e8"/>
+  <path d="M724 0h476v630H724z" fill="#274f3b"/>
+  <path d="M780 112h314v318H780z" fill="#f5f1e8" opacity=".94"/>
+  <path d="M818 306h238v124H818z" fill="#b45f3c"/>
+  <path d="M844 148h88v118h-88zM970 148h88v118h-88z" fill="#20241f"/>
+  <path d="M824 292h244l-122-112z" fill="#20241f"/>
+  <path d="M120 126h470v10H120z" fill="#b45f3c"/>
+  <text x="120" y="228" fill="#fffaf1" font-family="Georgia, serif" font-size="78" font-weight="700">The Good</text>
+  <text x="120" y="318" fill="#fffaf1" font-family="Georgia, serif" font-size="78" font-weight="700">Build Co.</text>
+  <text x="120" y="392" fill="#f2c28a" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="2">GOOD WORK. GOOD PEOPLE. GOOD BUILDS.</text>
+  <text x="120" y="526" fill="#20241f" font-family="Arial, sans-serif" font-size="28" font-weight="700">Residential remodels, additions, kitchens, baths, and exterior work.</text>
+</svg>
