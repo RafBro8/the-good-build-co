@@ -26,6 +26,8 @@ Build:
 - `/about`
 - `/contact`
 - route-specific metadata
+- active sticky navigation across routes
+- fuller service, project, process, about, and estimate page content
 
 Commit checkpoint:
 - `feat: add contractor site pages`
@@ -35,11 +37,11 @@ Commit checkpoint:
 Goal: make the website feel like a serious portfolio for a residential contractor.
 
 Build:
-- Project categories.
-- Project cards.
-- Project detail pages.
+- Project categories and filtering.
+- Richer project cards.
+- Expanded case-study notes.
 - Before/after-ready layout.
-- Service fit tags.
+- Service fit tags, scope details, and finish notes.
 
 Commit checkpoint:
 - `feat: add construction project gallery`
