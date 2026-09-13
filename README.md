@@ -4,7 +4,7 @@ Premium React and Tailwind demo website for a modern residential construction co
 
 ## Current Stage
 
-Stage 3: project gallery and case studies.
+Stage 4: estimate request flow.
 
 ## Brand Direction
 
@@ -28,6 +28,7 @@ Positioning:
 - Frontend-only demo first, with backend features deferred until they are useful.
 - Multi-page structure for services, projects, process, about, and estimate flow.
 - Project gallery with categories, case-study notes, scope details, and finish notes.
+- Frontend-only estimate flow with validation, preferred contact method, and request summary.
 
 ## Tech Stack
 

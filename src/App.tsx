@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
 
 type PagePath = '/' | '/services' | '/projects' | '/process' | '/about' | '/contact';
 
@@ -33,6 +33,20 @@ type Metadata = {
   title: string;
   description: string;
 };
+
+type EstimateFormState = {
+  budgetRange: string;
+  contactMethod: string;
+  email: string;
+  name: string;
+  neighborhood: string;
+  notes: string;
+  phone: string;
+  projectType: string;
+  timeline: string;
+};
+
+type EstimateErrors = Partial<Record<keyof EstimateFormState, string>>;
 
 const pagePaths = new Set<PagePath>([
   '/',
@@ -220,6 +234,31 @@ const proofPoints = [
   ['42', 'sample projects planned'],
   ['100%', 'scope-first planning'],
 ];
+
+const projectTypeOptions = [
+  'Kitchen or bath',
+  'Addition or conversion',
+  'Whole-home remodel',
+  'Deck, porch, or exterior',
+];
+
+const timelineOptions = ['Planning now', '1 to 3 months', '3 to 6 months', 'Flexible'];
+
+const budgetRangeOptions = ['Under $25k', '$25k to $75k', '$75k to $150k', '$150k+'];
+
+const contactMethodOptions = ['Phone call', 'Email', 'Text message'];
+
+const initialEstimateForm: EstimateFormState = {
+  budgetRange: budgetRangeOptions[0],
+  contactMethod: contactMethodOptions[0],
+  email: '',
+  name: '',
+  neighborhood: '',
+  notes: '',
+  phone: '',
+  projectType: projectTypeOptions[0],
+  timeline: timelineOptions[0],
+};
 
 function App() {
   const [currentPath, setCurrentPath] = useState<PagePath>(() =>
@@ -690,11 +729,47 @@ function AboutPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
 }
 
 function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState<EstimateFormState>(initialEstimateForm);
+  const [errors, setErrors] = useState<EstimateErrors>({});
+  const [submittedRequest, setSubmittedRequest] = useState<EstimateFormState | null>(null);
+
+  function updateField(
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = event.target;
+    const fieldName = name as keyof EstimateFormState;
+
+    setForm((current) => ({
+      ...current,
+      [fieldName]: value,
+    }));
+
+    if (errors[fieldName]) {
+      setErrors((current) => ({
+        ...current,
+        [fieldName]: undefined,
+      }));
+    }
+  }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+
+    const nextErrors = validateEstimateForm(form);
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setSubmittedRequest(null);
+      return;
+    }
+
+    setSubmittedRequest(form);
+  }
+
+  function resetForm() {
+    setForm(initialEstimateForm);
+    setErrors({});
+    setSubmittedRequest(null);
   }
 
   return (
@@ -727,70 +802,118 @@ function ContactPage() {
             </div>
           </div>
 
-          <form
-            className="grid gap-5 border border-white/12 bg-plaster p-6 text-ink shadow-soft"
-            onSubmit={handleSubmit}
-          >
-            <div>
-              <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">
-                Project snapshot
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold">
-                Tell us about the home.
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-ink/62">
-                Keep it rough. A few useful details are enough for a first conversation.
-              </p>
-            </div>
+          <div className="grid gap-5">
+            {submittedRequest ? (
+              <EstimateConfirmation request={submittedRequest} onReset={resetForm} />
+            ) : (
+              <form
+                className="grid gap-5 border border-white/12 bg-plaster p-6 text-ink shadow-soft"
+                onSubmit={handleSubmit}
+              >
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-[0.16em] text-clay">
+                    Project snapshot
+                  </p>
+                  <h2 className="mt-3 font-display text-3xl font-semibold">
+                    Tell us about the home.
+                  </h2>
+                  <p className="mt-3 text-sm leading-6 text-ink/62">
+                    Keep it rough. A few useful details are enough for a first conversation.
+                  </p>
+                </div>
 
-            {submitted ? (
-              <div className="border border-pine/18 bg-bone p-5">
-                <p className="text-sm font-bold uppercase tracking-[0.16em] text-pine">
-                  Request previewed
-                </p>
-                <p className="mt-2 text-sm leading-6 text-ink/66">
-                  This demo confirmation shows the handoff a homeowner would expect after
-                  sharing project details.
-                </p>
-              </div>
-            ) : null}
+                <div className="grid gap-5 md:grid-cols-2">
+                  <Field
+                    error={errors.name}
+                    label="Name"
+                    name="name"
+                    onChange={updateField}
+                    placeholder="Your name"
+                    value={form.name}
+                  />
+                  <Field
+                    error={errors.phone}
+                    label="Phone"
+                    name="phone"
+                    onChange={updateField}
+                    placeholder="(555) 555-1234"
+                    value={form.phone}
+                  />
+                </div>
+                <Field
+                  error={errors.email}
+                  label="Email"
+                  name="email"
+                  onChange={updateField}
+                  placeholder="you@example.com"
+                  type="email"
+                  value={form.email}
+                />
+                <div className="grid gap-5 md:grid-cols-2">
+                  <SelectField
+                    label="Project type"
+                    name="projectType"
+                    onChange={updateField}
+                    options={projectTypeOptions}
+                    value={form.projectType}
+                  />
+                  <SelectField
+                    label="Timeline"
+                    name="timeline"
+                    onChange={updateField}
+                    options={timelineOptions}
+                    value={form.timeline}
+                  />
+                </div>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <SelectField
+                    label="Budget range"
+                    name="budgetRange"
+                    onChange={updateField}
+                    options={budgetRangeOptions}
+                    value={form.budgetRange}
+                  />
+                  <Field
+                    error={errors.neighborhood}
+                    label="Neighborhood"
+                    name="neighborhood"
+                    onChange={updateField}
+                    placeholder="Town or neighborhood"
+                    value={form.neighborhood}
+                  />
+                </div>
+                <SelectField
+                  label="Preferred contact"
+                  name="contactMethod"
+                  onChange={updateField}
+                  options={contactMethodOptions}
+                  value={form.contactMethod}
+                />
+                <TextareaField
+                  error={errors.notes}
+                  label="Project notes"
+                  name="notes"
+                  onChange={updateField}
+                  placeholder="Tell us about the home, timeline, budget range, and what you want to change."
+                  value={form.notes}
+                />
+                <button
+                  className="bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
+                  type="submit"
+                >
+                  Preview request
+                </button>
+              </form>
+            )}
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <Field label="Name" placeholder="Your name" />
-              <Field label="Phone" placeholder="(555) 555-1234" />
+            <div className="grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
+              {['Review request', 'Schedule walkthrough', 'Shape first scope'].map((step) => (
+                <div className="bg-ink p-5 text-sm font-bold uppercase tracking-[0.14em] text-white/68" key={step}>
+                  {step}
+                </div>
+              ))}
             </div>
-            <Field label="Email" placeholder="you@example.com" />
-            <div className="grid gap-5 md:grid-cols-2">
-              <SelectField
-                label="Project type"
-                options={['Kitchen or bath', 'Addition or conversion', 'Whole-home remodel', 'Deck, porch, or exterior']}
-              />
-              <SelectField
-                label="Timeline"
-                options={['Planning now', '1 to 3 months', '3 to 6 months', 'Flexible']}
-              />
-            </div>
-            <div className="grid gap-5 md:grid-cols-2">
-              <SelectField
-                label="Budget range"
-                options={['Under $25k', '$25k to $75k', '$75k to $150k', '$150k+']}
-              />
-              <Field label="Neighborhood" placeholder="Town or neighborhood" />
-            </div>
-            <label className="grid gap-2 text-sm font-bold text-ink">
-              Project notes
-              <textarea
-                className="min-h-32 border border-ink/12 bg-bone px-3 py-3 text-sm font-medium text-ink outline-none focus:border-clay"
-                placeholder="Tell us about the home, timeline, budget range, and what you want to change."
-              />
-            </label>
-            <button
-              className="bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
-              type="submit"
-            >
-              {submitted ? 'Request previewed' : 'Preview request'}
-            </button>
-          </form>
+          </div>
         </div>
       </section>
 
@@ -994,27 +1117,162 @@ function ScopeBoard() {
   );
 }
 
-function Field({ label, placeholder }: { label: string; placeholder: string }) {
+function EstimateConfirmation({
+  onReset,
+  request,
+}: {
+  onReset: () => void;
+  request: EstimateFormState;
+}) {
+  const summary = [
+    ['Project type', request.projectType],
+    ['Timeline', request.timeline],
+    ['Budget range', request.budgetRange],
+    ['Neighborhood', request.neighborhood],
+    ['Preferred contact', request.contactMethod],
+    ['Contact', `${request.name} / ${request.phone}`],
+    ['Email', request.email],
+    ['Notes', request.notes],
+  ];
+
+  return (
+    <section className="border border-white/12 bg-plaster p-6 text-ink shadow-soft">
+      <p className="text-sm font-bold uppercase tracking-[0.16em] text-pine">
+        Request previewed
+      </p>
+      <h2 className="mt-3 font-display text-3xl font-semibold">
+        Here is the project snapshot.
+      </h2>
+      <p className="mt-3 text-sm leading-6 text-ink/62">
+        This frontend demo now behaves like a real estimate intake: it checks the
+        required details and returns a clear summary before anything is sent.
+      </p>
+
+      <dl className="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+        {summary.map(([label, value]) => (
+          <div className="grid gap-2 py-3 md:grid-cols-[0.32fr_0.68fr]" key={label}>
+            <dt className="text-sm font-bold text-clay">{label}</dt>
+            <dd className="text-sm leading-6 text-ink/72">{value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <button
+        className="mt-6 bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-clay"
+        onClick={onReset}
+        type="button"
+      >
+        Start another preview
+      </button>
+    </section>
+  );
+}
+
+function Field({
+  error,
+  label,
+  name,
+  onChange,
+  placeholder,
+  type = 'text',
+  value,
+}: {
+  error?: string;
+  label: string;
+  name: keyof EstimateFormState;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  type?: string;
+  value: string;
+}) {
+  const errorId = `${name}-error`;
+
   return (
     <label className="grid gap-2 text-sm font-bold text-ink">
       {label}
       <input
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={Boolean(error)}
         className="h-12 border border-ink/12 bg-bone px-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        name={name}
+        onChange={onChange}
         placeholder={placeholder}
+        type={type}
+        value={value}
       />
+      {error ? (
+        <span className="text-sm font-semibold text-clay" id={errorId}>
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
 
-function SelectField({ label, options }: { label: string; options: string[] }) {
+function SelectField({
+  label,
+  name,
+  onChange,
+  options,
+  value,
+}: {
+  label: string;
+  name: keyof EstimateFormState;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  options: string[];
+  value: string;
+}) {
   return (
     <label className="grid gap-2 text-sm font-bold text-ink">
       {label}
-      <select className="h-12 border border-ink/12 bg-bone px-3 text-sm font-medium text-ink outline-none focus:border-clay">
+      <select
+        className="h-12 border border-ink/12 bg-bone px-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        name={name}
+        onChange={onChange}
+        value={value}
+      >
         {options.map((option) => (
           <option key={option}>{option}</option>
         ))}
       </select>
+    </label>
+  );
+}
+
+function TextareaField({
+  error,
+  label,
+  name,
+  onChange,
+  placeholder,
+  value,
+}: {
+  error?: string;
+  label: string;
+  name: keyof EstimateFormState;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  placeholder: string;
+  value: string;
+}) {
+  const errorId = `${name}-error`;
+
+  return (
+    <label className="grid gap-2 text-sm font-bold text-ink">
+      {label}
+      <textarea
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={Boolean(error)}
+        className="min-h-32 border border-ink/12 bg-bone px-3 py-3 text-sm font-medium text-ink outline-none focus:border-clay"
+        name={name}
+        onChange={onChange}
+        placeholder={placeholder}
+        value={value}
+      />
+      {error ? (
+        <span className="text-sm font-semibold text-clay" id={errorId}>
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }
@@ -1112,6 +1370,33 @@ function Footer({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
       </div>
     </footer>
   );
+}
+
+function validateEstimateForm(form: EstimateFormState) {
+  const nextErrors: EstimateErrors = {};
+  const phoneDigits = form.phone.replace(/\D/g, '');
+
+  if (form.name.trim().length < 2) {
+    nextErrors.name = 'Enter your name.';
+  }
+
+  if (phoneDigits.length < 10) {
+    nextErrors.phone = 'Enter a phone number with area code.';
+  }
+
+  if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) {
+    nextErrors.email = 'Enter a valid email address.';
+  }
+
+  if (form.neighborhood.trim().length < 2) {
+    nextErrors.neighborhood = 'Enter a town or neighborhood.';
+  }
+
+  if (form.notes.trim().length < 12) {
+    nextErrors.notes = 'Add a short note about the project.';
+  }
+
+  return nextErrors;
 }
 
 function getPagePath(pathname: string): PagePath {

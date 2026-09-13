@@ -54,6 +54,8 @@ Build:
 - Form validation.
 - Demo confirmation state.
 - Project type and budget range fields.
+- Preferred contact method.
+- Project summary after submit.
 - Clear next-step copy.
 
 Commit checkpoint:
