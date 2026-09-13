@@ -101,6 +101,8 @@ Build:
 - Copy pass.
 - Image framing check.
 - Build/lint verification.
+- Mobile navigation polish.
+- Estimate-flow interaction check.
 
 Commit checkpoint:
 - `style: polish construction demo`

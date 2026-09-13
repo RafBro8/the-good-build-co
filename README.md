@@ -4,7 +4,7 @@ Premium React and Tailwind demo website for a modern residential construction co
 
 ## Current Stage
 
-Stage 5.5: color system and visual mood polish.
+Stage 6: visual QA and polish.
 
 ## Brand Direction
 
@@ -31,6 +31,7 @@ Positioning:
 - Frontend-only estimate flow with validation, preferred contact method, and request summary.
 - SEO-ready route metadata, social preview tags, sitemap, robots file, and Vercel route rewrites.
 - Material-inspired color system with pine, limestone, brass, clay, plaster, and warm charcoal.
+- Desktop and mobile visual QA pass with clean wrapped navigation and route checks.
 
 ## Portfolio Case Study
 
@@ -50,6 +51,7 @@ Features:
 - Controlled estimate form with validation and confirmation summary.
 - Deployment-ready SEO files and Vercel rewrites.
 - Warm contractor-specific visual language that avoids a generic black-and-white template feel.
+- Mobile-friendly navigation and project filters tuned for screenshot-ready presentation.
 
 Screenshots:
 

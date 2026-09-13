@@ -345,11 +345,11 @@ function Header({
         </a>
         <nav
           aria-label="Main navigation"
-          className="flex gap-2 overflow-x-auto text-sm font-semibold text-ink/66"
+          className="flex flex-wrap gap-2 text-sm font-semibold text-ink/66"
         >
           {navItems.map((item) => (
             <a
-              className={`whitespace-nowrap border px-3 py-2 transition ${
+              className={`whitespace-nowrap border px-3 py-2 transition sm:px-4 ${
                 currentPath === item.href
                   ? 'border-brass bg-pine text-white'
                   : 'border-pine/12 bg-limestone/55 hover:border-brass hover:text-pine'
@@ -602,7 +602,7 @@ function ProjectsPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
       />
       <section className="bg-gradient-to-br from-ink via-pine to-graphite py-16 text-white">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="flex gap-2 overflow-x-auto pb-2">
+          <div className="flex flex-wrap gap-2">
             {projectCategories.map((category) => (
               <button
                 className={`whitespace-nowrap border px-4 py-2 text-sm font-bold transition ${
