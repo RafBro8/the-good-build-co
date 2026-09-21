@@ -1365,36 +1365,46 @@ function Footer({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
         <div>
           <p className="font-display text-xl font-semibold text-white">The Good Build Co.</p>
           <p className="mt-1">Good work. Good people. Good builds.</p>
-          <p className="mt-2 text-xs uppercase tracking-[0.14em] text-white/38">
-            Demo site. The Good Build Co. is not a real company.
-          </p>
-          <p className="mt-2">
-            Designed &amp; Built by{' '}
-            <a
-              href="https://goodlookingdigital.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold text-white/80 underline-offset-2 transition hover:text-copper hover:underline"
-            >
-              Good Looking Digital
-            </a>
-          </p>
         </div>
-        <nav aria-label="Footer navigation" className="flex flex-wrap gap-3">
-          {navItems.map((item) => (
-            <a
-              className="transition hover:text-copper"
-              href={item.href}
-              key={item.href}
-              onClick={(event) => {
-                event.preventDefault();
-                onNavigate(item.href);
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+
+        {/* Nav, notice and credit share the right column so the left one
+            carries the name and the motto and nothing else. Stacked four
+            deep on the left it read as a paragraph of small print with an
+            unrelated list of links floating opposite it. */}
+        <div className="flex flex-col gap-3 md:items-end md:text-right">
+          <nav aria-label="Footer navigation" className="flex flex-wrap gap-3 md:justify-end">
+            {navItems.map((item) => (
+              <a
+                className="transition hover:text-copper"
+                href={item.href}
+                key={item.href}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onNavigate(item.href);
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div>
+            <p className="text-xs uppercase tracking-[0.14em] text-white/38">
+              Demo site. The Good Build Co. is not a real company.
+            </p>
+            <p className="mt-1">
+              Designed &amp; Built by{' '}
+              <a
+                href="https://goodlookingdigital.com"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-white/80 underline-offset-2 transition hover:text-copper hover:underline"
+              >
+                Good Looking Digital
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );
