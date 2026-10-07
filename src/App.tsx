@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 type PagePath = '/' | '/services' | '/projects' | '/process' | '/about' | '/contact';
 
@@ -146,7 +146,7 @@ const projects: Project[] = [
     scope: ['Cabinet refacing', 'Lighting plan', 'Countertop replacement', 'Open shelf millwork'],
     stats: '6 week demo timeline',
     image:
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=82',
+      'https://images.unsplash.com/photo-1622372738946-62e02505feb3?auto=format&fit=crop&w=1200&q=82',
   },
   {
     category: 'Additions',
@@ -583,6 +583,14 @@ function ServicesPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
 function ProjectsPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('All');
   const [selectedProjectTitle, setSelectedProjectTitle] = useState(projects[0].title);
+  const caseNotesRef = useRef<HTMLDivElement | null>(null);
+
+  // The case notes render below the grid, so updating them silently looked
+  // like the button did nothing. Move the reader to what they just asked for.
+  const selectProject = (title: string) => {
+    setSelectedProjectTitle(title);
+    caseNotesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const filteredProjects = useMemo(
     () =>
       activeCategory === 'All'
@@ -628,11 +636,13 @@ function ProjectsPage({ onNavigate }: { onNavigate: (path: PagePath) => void }) 
 
           <ProjectGrid
             activeTitle={selectedProject.title}
-            onProjectSelect={setSelectedProjectTitle}
+            onProjectSelect={selectProject}
             projects={filteredProjects}
           />
 
-          <ProjectCaseStudy project={selectedProject} />
+          <div id="case-notes" ref={caseNotesRef} className="scroll-mt-24">
+            <ProjectCaseStudy project={selectedProject} />
+          </div>
 
           <div className="mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3">
             {['Before/after ready', 'Scope-led writing', 'Service fit tags'].map((item) => (
